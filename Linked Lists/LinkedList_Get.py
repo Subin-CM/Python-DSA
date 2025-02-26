@@ -26,10 +26,21 @@ class LinkedList:
             print(temp.value)
             temp=temp.next
 
+    def get(self, index):
+        
+        if index<0 or index>=self.length:
+            return None
+        temp=self.head
+        for _ in range(index):
+            temp=temp.next
+        return temp
+
 
 myll=LinkedList(5)
 myll.append(10)
 myll.append(15)
 myll.printList()
 myll.printList()
+
+print(myll.get(2))
 
