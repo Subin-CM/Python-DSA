@@ -1,4 +1,3 @@
-
 class Node:
     def __init__(self, value):
         self.value = value
@@ -70,29 +69,68 @@ class DoublyLinkedList:
             temp.next = None      
         self.length -= 1
         return temp
-    
+
     def get(self, index):
-        if index<0 or index>=self.length:
+        if index < 0 or index >= self.length:
             return None
-        if index<self.length/2:
-            temp=self.head
+        temp = self.head
+        if index < self.length/2:
             for _ in range(index):
-                temp=temp.next
-            return temp
+                temp = temp.next
         else:
-            temp=self.tail
-            for _ in range(self.length-1, index, -1):
-                temp=temp.prev
-            return temp
+            temp = self.tail
+            for _ in range(self.length - 1, index, -1):
+                temp = temp.prev  
+        return temp
+        
+    def set_value(self, index, value):
+        temp = self.get(index)
+        if temp:
+            temp.value = value
+            return True
+        return False
+    
+    def insert(self, index, value):
+        if index<0 or index>self.length:
+            return None
+        if index==0:
+            return self.prepend(value)
+        if index==self.length:
+            return self.append(value)
+        new_node=Node(value)
+        before=self.get(index-1)
+        after=before.next
+        before.next=new_node
+        new_node.next=after
+        after.prev=new_node
+        new_node.prev=before
+        self.length+=1
+        return True
 
 
-my_doubly_linked_list = DoublyLinkedList(0)
-my_doubly_linked_list.append(1)
-my_doubly_linked_list.append(2)
+my_doubly_linked_list = DoublyLinkedList(1)
 my_doubly_linked_list.append(3)
 
-print('Get node from first half of DLL:')
-print(my_doubly_linked_list.get(1).value)
 
-print('\nGet node from second half of DLL:')
-print(my_doubly_linked_list.get(2).value)
+print('DLL before insert():')
+my_doubly_linked_list.print_list()
+
+
+my_doubly_linked_list.insert(1,2)
+
+print('\nDLL after insert(2) in middle:')
+my_doubly_linked_list.print_list()
+
+
+my_doubly_linked_list.insert(0,0)
+
+print('\nDLL after insert(0) at beginning:')
+my_doubly_linked_list.print_list()
+
+
+my_doubly_linked_list.insert(4,4)
+
+print('\nDLL after insert(4) at end:')
+my_doubly_linked_list.print_list()
+
+
