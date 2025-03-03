@@ -72,8 +72,6 @@ class DoublyLinkedList:
         return temp
     
     def get(self, index):
-        if self.length==0:
-            return None
         if index<0 or index>=self.length:
             return None
         if index<self.length/2:
