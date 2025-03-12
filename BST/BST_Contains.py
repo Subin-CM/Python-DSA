@@ -108,3 +108,4 @@ check(True, result, "Check if 12 exists:")
 result = bst.contains(20)
 check(True, result, "Check if 20 exists:")
 
+
